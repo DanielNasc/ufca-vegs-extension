@@ -1,38 +1,28 @@
-//const socket = io("http://localhost:3000");
+const socket = io("http://localhost:3000");
 
-//socket.on("connect", () => {
-  //   console.log("connected");
-   //  }
-//);
+const counter = document.getElementById("remaining");
 
-const socket = new WebSocket("ws://localhost:3000");
+socket.on("decrement", () => {
+  counter.innerText = String(Number(counter.innerText) - 1).padStart(4, "0");
+});
 
-// socket.on("connect_error", (err) => {
-//     console.log(`connect_error due to ${err.message}`);
-// });
+socket.on("increment", () => {
+  counter.innerText = String(Number(counter.innerText) + 1).padStart(4, "0");
+});
 
-const remaining = document.getElementById('remaining');
+const remaining = document.getElementById("remaining");
 
 try {
-fetch('http://localhost:3000/vegs/count')
-                .then(function(response) {
-                    console.log(response);
-                    return response.json();
-                })
-                .catch(e => console.log(e))
-                .then(function(myJson) {
-                    console.log(myJson);
-                    remaining.innerText = String(myJson.activeVegs).padStart(4, '0');
-                });
+  fetch("http://localhost:3000/vegs/count")
+    .then(function (response) {
+      console.log(response);
+      return response.json();
+    })
+    .catch((e) => console.log(e))
+    .then(function (myJson) {
+      console.log(myJson);
+      remaining.innerText = String(myJson.activeVegs).padStart(4, "0");
+    });
 } catch (e) {
-  console.log(e)  
+  console.log(e);
 }
-
-chrome.webRequest.onBeforeRequest.addListener(
-  (details) => {
-    console.log(details)
-    return {cancel: true}
-  },
-  {urls: ["<all_urls>"]},
-);
-

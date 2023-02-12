@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# wget a file and put on scripts folder
+wget "https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.min.js" -O "scripts/socket.io.js"

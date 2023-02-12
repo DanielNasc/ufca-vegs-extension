@@ -7,28 +7,14 @@
       "default_popup": "pei.html",
       "default_icon": "pei_icon.png"
     },
-    "commands": {
-        "send": {
-            "suggested_key": {
-                "default": "Ctrl+Shift+K",
-                "mac": "MacCtrl+Shift+P"
-            },
-            "description": "Send to Pei"
-        }
-    },
     "content_scripts": [
         {
-          "matches": ["file://wsl.localhost/Arch/home/daniel_nasc/codes/html/ufca-vegs/eee.html",  "http://localhost:5500/*" ],
+          "matches": ["http://localhost:5500/*" ],
           "js": ["scripts/socket.io.js", "content-script.js"]
         }
       ],
     "permissions": [
-      "webRequest",
-      "webRequestBlocking",
-    "nativeMessaging"
-    ],
-    "background": {
-      "service_worker": "background.js"
-    }
+      "webNavigation"
+    ]
 }
 
